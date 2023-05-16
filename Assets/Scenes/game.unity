@@ -246,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229521533}
   - component: {fileID: 229521531}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Column1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,6 +293,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &425024355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425024356}
+  m_Layer: 0
+  m_Name: gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425024356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425024355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.69, y: 0.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210365066}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -433,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961117850}
   - component: {fileID: 961117848}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Footer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,8 +522,9 @@ GameObject:
   m_Component:
   - component: {fileID: 971552484}
   - component: {fileID: 971552485}
+  - component: {fileID: 971552486}
   m_Layer: 0
-  m_Name: greg-dunne-chara-idle-1
+  m_Name: characterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,6 +597,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &971552486
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971552483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a356ea6c51fb1d4a8f203bdc204e34e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1095171365
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +769,7 @@ Transform:
   m_Children:
   - {fileID: 1095171366}
   - {fileID: 971552484}
+  - {fileID: 425024356}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -731,6 +785,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c04be53c512f4a49810cc5159e554c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProject: {fileID: 2782441325624273654, guid: e4b77b641df3c9a4aba886d7937c3023, type: 3}
+  gun: {fileID: 425024356}
+  fireForce: 10
   Speed: 10
   JumpForce: 10
   isJumping: 0
@@ -1028,7 +1085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727621300}
   - component: {fileID: 1727621298}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Column2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
