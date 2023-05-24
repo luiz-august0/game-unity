@@ -35,7 +35,7 @@ public class loadScene : MonoBehaviour
         if (uwr.isNetworkError) {
             Debug.Log(uwr.error);
         } else {
-            Debug.Log("Sended");
+            Debug.Log("Uploaded");
         }
     }
 
