@@ -44,6 +44,6 @@ public class loadScene : MonoBehaviour
     public async void LoadScene() {
         userData.userName = inputName.GetComponent<Text>().text;
         await SendScore();
-        SceneManager.LoadScene("game");
+        SceneManager.LoadScene("cave 1");
     }
 }

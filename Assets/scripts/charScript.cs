@@ -8,6 +8,8 @@ public class charScript : MonoBehaviour
     public GameObject fireProject;
     public Transform gun;
     private bool fire;
+    private bool isFiring = false;
+    private GameObject currentProjectile;
     public float fireForce;
     private bool flipX = false;
     public float Speed;
@@ -52,12 +54,23 @@ public class charScript : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitForProjectileDestroyed(){
+        yield return new WaitUntil(() => currentProjectile == null);
+        isFiring = false;
+    }
+
     private void Fire() {
         if (fire == true) {
-            GameObject temp = Instantiate(fireProject);
-            temp.transform.position = gun.position;
-            temp.GetComponent<Rigidbody2D>().velocity = new Vector2(fireForce, 0);
-            Destroy(temp.gameObject, 3f);
+            if (!isFiring) {
+                isFiring = true;
+
+                currentProjectile = Instantiate(fireProject);
+                currentProjectile.transform.position = gun.position;
+                currentProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(fireForce, 0);
+                Destroy(currentProjectile, 0.5f);
+                
+                StartCoroutine(WaitForProjectileDestroyed());
+            }
         }
     }
 
