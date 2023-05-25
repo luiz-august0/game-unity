@@ -12,11 +12,11 @@ public class scoreManager : MonoBehaviour
         sd = new scoreData();
     }
 
-    public IEnumerable<scoreClass> getHighScores() {
+    /*public IEnumerable<scoreClass> getHighScores() {
         return sd.scores.OrderByDescending(x => x.score);
     }
 
     public void addScore(scoreClass score) {
         sd.scores.Add(score);
-    }
+    }*/
 }
