@@ -288,8 +288,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 880735845}
-        m_TargetAssemblyTypeName: loadDataScores, Assembly-CSharp
-        m_MethodName: getDataScores
+        m_TargetAssemblyTypeName: scoreMenu, Assembly-CSharp
+        m_MethodName: loadSceneScores
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
