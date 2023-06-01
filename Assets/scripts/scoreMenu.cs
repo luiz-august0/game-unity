@@ -1,14 +1,21 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class ScoreMenu : MonoBehaviour
 {
-    public void getDataScores() {
-        StartCoroutine(getRequest("https://api-gameconstruct3.vercel.app/player_score"));
-    }  
+    public ScoreUi scoreUi;
+
+    public void reloadScoreList() {
+        foreach(GameObject objclone in GameObject.FindGameObjectsWithTag("row")){
+            Destroy(objclone, 2f); 
+        }
+        scoreUi.getDataScores();
+    }
 
     public void loadSceneScores() {
         SceneManager.LoadScene("menuScores");
@@ -17,18 +24,4 @@ public class ScoreMenu : MonoBehaviour
     public void loadSceneMenu() {
         SceneManager.LoadScene("menu");
     }
-
-    IEnumerator getRequest(string uri) {
-        UnityWebRequest uwr = UnityWebRequest.Get(uri);
-        yield return uwr.SendWebRequest();
-
-        if (uwr.isNetworkError)
-        {
-            Debug.Log("Error While Sending: " + uwr.error);
-        }
-        else
-        {
-            Debug.Log("Received: " + uwr.downloadHandler.text);
-        }
-    }   
 }

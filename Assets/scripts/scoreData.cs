@@ -7,9 +7,9 @@ using UnityEngine.UI;
 [Serializable]
 public class ScoreData
 {
-    public List<ScoreClass> scores;
+    public List<Score> scores;
 
     public ScoreData() {
-        scores = new List<ScoreClass>();
+        scores = new List<Score>();
     }
 }

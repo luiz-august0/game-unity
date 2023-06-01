@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +13,11 @@ public class ScoreManager : MonoBehaviour
         sd = new ScoreData();
     }
 
-    /*public IEnumerable<ScoreClass> getHighScores() {
+    public IEnumerable<Score> GetHighScores() {
         return sd.scores.OrderByDescending(x => x.score);
     }
 
-    public void addScore(ScoreClass score) {
+    public void AddScore(Score score) {
         sd.scores.Add(score);
-    }*/
+    }
 }
