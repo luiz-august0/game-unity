@@ -7,19 +7,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
 
-public class UserData  {
+public class UserDataToSend {
     public string player;
     public double score;
 }
 
-public class loadScene : MonoBehaviour
+public class HomeMenu : MonoBehaviour
 {
     private async Task SendScore() {
-        String username = userData.userName;
-        username = username.Replace("\"", "\\\"");;
+        String player = UserData.player;
+        player = player.Replace("\"", "\\\"");;
 
-        var user = new UserData();
-        user.player = username;
+        var user = new UserDataToSend();
+        user.player = player;
         user.score = 1000;
 
         string json = JsonUtility.ToJson(user);
@@ -39,10 +39,10 @@ public class loadScene : MonoBehaviour
         }
     }
 
-    userData userData;
+    UserData UserData;
     public GameObject inputName;
     public async void LoadScene() {
-        userData.userName = inputName.GetComponent<Text>().text;
+        UserData.player = inputName.GetComponent<Text>().text;
         await SendScore();
         SceneManager.LoadScene("cave 1");
     }

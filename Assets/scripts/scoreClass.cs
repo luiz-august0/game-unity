@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class scoreClass
+public class ScoreClass
 {
     public string player;
     public float score;
 
-    public scoreClass(string player, float score) {
+    public ScoreClass(string player, float score) {
         this.player = player;
         this.score = score;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class scoreMenu : MonoBehaviour
+public class ScoreMenu : MonoBehaviour
 {
     public void getDataScores() {
         StartCoroutine(getRequest("https://api-gameconstruct3.vercel.app/player_score"));

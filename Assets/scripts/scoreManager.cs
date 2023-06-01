@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-    private scoreData sd;
+    private ScoreData sd;
     
     void Awake() {
-        sd = new scoreData();
+        sd = new ScoreData();
     }
 
-    /*public IEnumerable<scoreClass> getHighScores() {
+    /*public IEnumerable<ScoreClass> getHighScores() {
         return sd.scores.OrderByDescending(x => x.score);
     }
 
-    public void addScore(scoreClass score) {
+    public void addScore(ScoreClass score) {
         sd.scores.Add(score);
     }*/
 }

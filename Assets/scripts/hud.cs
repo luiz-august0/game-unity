@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class hud : MonoBehaviour
+public class Hud : MonoBehaviour
 {
     public GameObject outputName;
-    userData userData;
+    UserData UserData;
 
     public void Awake() {
-        outputName.GetComponent<Text>().text = userData.userName;
+        outputName.GetComponent<Text>().text = UserData.player;
     }
 }

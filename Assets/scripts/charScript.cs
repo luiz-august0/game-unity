@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class charScript : MonoBehaviour
+public class CharScript : MonoBehaviour
 {
     public GameObject fireProject;
     public Transform gun;
@@ -80,5 +80,17 @@ public class charScript : MonoBehaviour
         x *= -1;
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
         fireForce *= -1;
+    }
+
+    void OnCollisionEnter2D(Collision2D collisor) {
+        if(collisor.gameObject.layer == 3) {
+            isJumping = false;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collisor) {
+        if(collisor.gameObject.layer == 3) {
+            isJumping = true;
+        }
     }
 }

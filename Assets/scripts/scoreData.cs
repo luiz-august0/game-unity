@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class scoreData
+public class ScoreData
 {
-    public List<scoreClass> scores;
+    public List<ScoreClass> scores;
 
-    public scoreData() {
-        scores = new List<scoreClass>();
+    public ScoreData() {
+        scores = new List<ScoreClass>();
     }
 }
