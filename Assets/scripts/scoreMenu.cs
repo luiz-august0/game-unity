@@ -8,13 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class ScoreMenu : MonoBehaviour
 {
-    public ScoreUi scoreUi;
-
     public void reloadScoreList() {
         foreach(GameObject objclone in GameObject.FindGameObjectsWithTag("row")){
-            Destroy(objclone, 2f); 
+            Destroy(objclone, 0f); 
         }
-        scoreUi.getDataScores();
+        SceneManager.LoadScene("menuScores");
     }
 
     public void loadSceneScores() {
