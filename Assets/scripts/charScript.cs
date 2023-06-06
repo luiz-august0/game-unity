@@ -64,6 +64,7 @@ public class CharScript : MonoBehaviour
             if (!isFiring) {
                 isFiring = true;
 
+                AudioManager.Instance.PlaySFX("Fire");
                 currentProjectile = Instantiate(fireProject);
                 currentProjectile.transform.position = gun.position;
                 currentProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(fireForce, 0);
