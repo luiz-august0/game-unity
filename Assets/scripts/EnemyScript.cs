@@ -6,6 +6,8 @@ public class EnemyScript : MonoBehaviour
 {
     public float moveSpeed;   // Velocidade de movimento do inimigo
     public float moveDistance;   // Distância total que o inimigo irá percorrer
+    public int maxHealth = 2;   // Vida máxima do inimigo
+    private int currentHealth;  // Vida atual do inimigo
 
     private float initialPositionX;   // Posição inicial do inimigo
     private float targetPositionX;    // Posição alvo do inimigo
@@ -16,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     {
         initialPositionX = transform.position.x;
         targetPositionX = initialPositionX + moveDistance;
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -41,16 +44,6 @@ public class EnemyScript : MonoBehaviour
             // Inverte a direção do movimento para direita
             movingRight = true;
         }
-    }
-}
-public class EnemyHealth : MonoBehaviour
-{
-    public int maxHealth = 2;   // Vida máxima do inimigo
-    private int currentHealth;  // Vida atual do inimigo
-
-    void Start()
-    {
-        currentHealth = maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -80,5 +73,3 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
-
