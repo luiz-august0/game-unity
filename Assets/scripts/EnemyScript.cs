@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    Cave Cave;
+    public SpriteRenderer door;
     public float moveSpeed;   // Velocidade de movimento do inimigo
     public float moveDistance;   // Distância total que o inimigo irá percorrer
     public int maxHealth = 2;   // Vida máxima do inimigo
@@ -71,5 +74,10 @@ public class EnemyScript : MonoBehaviour
         // Lógica para lidar com a morte do inimigo
         // Por exemplo, você pode destruir o objeto do inimigo, tocar uma animação de morte, adicionar pontos ao jogador, etc.
         Destroy(gameObject);
+        Cave.totalDeadEnemies = Cave.totalDeadEnemies + 1;
+
+        if (Cave.totalDeadEnemies == 1) {
+            door.GetComponent<SpriteRenderer>().color = Color.green;
+        }
     }
 }
