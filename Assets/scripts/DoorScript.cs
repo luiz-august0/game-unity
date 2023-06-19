@@ -13,7 +13,12 @@ public class DoorScript : MonoBehaviour
 
                 if (SceneManager.GetActiveScene().name == "cave 1") {
                     SceneManager.LoadScene("cave 2");
-                    Cave.totalEnemiesOnScene = 0;
+                    Cave.totalEnemiesOnScene = 4;
+                }
+
+                if (SceneManager.GetActiveScene().name == "cave 2") {
+                    SceneManager.LoadScene("cave 3");
+                    Cave.totalEnemiesOnScene = 1;
                 }
 
             }

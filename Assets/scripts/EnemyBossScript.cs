@@ -2,16 +2,50 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.Threading.Tasks;
 
-public class EnemyScript : MonoBehaviour
+public class UserDataToSend {
+    public string player;
+    public double score;
+}
+
+public class EnemyBossScript : MonoBehaviour
 {
+
+    private async Task SendScore() {
+        String player = UserData.player;
+        player = player.Replace("\"", "\\\"");;
+
+        var user = new UserDataToSend();
+        user.player = player;
+        user.score = score;
+
+        string json = JsonUtility.ToJson(user);
+
+        var uwr = new UnityWebRequest("https://api-gameconstruct3.vercel.app/player_score", "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+        
+        uwr.SendWebRequest();
+
+        if (uwr.isNetworkError) {
+            Debug.Log(uwr.error);
+        } else {
+            Debug.Log("Uploaded");
+        }
+    }
+
     Cave Cave;
     UserData UserData;
-    public SpriteRenderer door;
     public float moveSpeed;
     public float moveDistance;  
-    public int maxHealth = 2;  
+    public int maxHealth = 5;  
     private int currentHealth; 
+    private double score;
 
     private float initialPositionX;   
     private float targetPositionX;    
@@ -71,14 +105,13 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void EnemyDeath()
+    private async void EnemyDeath()
     {
         Destroy(gameObject);
-        Cave.totalDeadEnemies = Cave.totalDeadEnemies + 1;
         UserData.score++;
-
-        if (Cave.totalDeadEnemies == Cave.totalEnemiesOnScene) {
-            door.GetComponent<SpriteRenderer>().color = Color.green;
-        }
+        score = (UserData.score * UserData.life);
+        UserData.scoreToShow = score;
+        await SendScore();
+        SceneManager.LoadScene("gameWin");
     }
 }
