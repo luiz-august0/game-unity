@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour
 {
     public GameObject outputName;
+    public GameObject outputLife;
     UserData UserData;
 
-    public void Awake() {
+    public void Update() {
         outputName.GetComponent<Text>().text = UserData.player;
+        outputLife.GetComponent<Text>().text = UserData.life.ToString();
     }
 }

@@ -14,6 +14,8 @@ public class UserDataToSend {
 
 public class HomeMenu : MonoBehaviour
 {
+    Cave Cave;
+
     private async Task SendScore() {
         String player = UserData.player;
         player = player.Replace("\"", "\\\"");;
@@ -45,5 +47,6 @@ public class HomeMenu : MonoBehaviour
         UserData.player = inputName.GetComponent<Text>().text;
         await SendScore();
         SceneManager.LoadScene("cave 1");
+        Cave.totalEnemiesOnScene = 1;
     }
 }

@@ -7,15 +7,16 @@ public class EnemyScript : MonoBehaviour
 {
     Cave Cave;
     public SpriteRenderer door;
-    public float moveSpeed;   // Velocidade de movimento do inimigo
-    public float moveDistance;   // Distância total que o inimigo irá percorrer
-    public int maxHealth = 2;   // Vida máxima do inimigo
-    private int currentHealth;  // Vida atual do inimigo
+    public float moveSpeed;
+    public float moveDistance;  
+    public int maxHealth = 2;  
+    private int currentHealth; 
 
-    private float initialPositionX;   // Posição inicial do inimigo
-    private float targetPositionX;    // Posição alvo do inimigo
+    private float initialPositionX;   
+    private float targetPositionX;    
 
-    private bool movingRight = true;  // Flag para determinar a direção do movimento
+    private bool movingRight = true; 
+    private GameObject[] bullets;
 
     void Start()
     {
@@ -26,7 +27,6 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        // Movimenta o inimigo na direção correta
         if (movingRight)
         {
             transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
@@ -36,15 +36,12 @@ public class EnemyScript : MonoBehaviour
             transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
         }
 
-        // Verifica se o inimigo atingiu a posição alvo
         if (transform.position.x >= targetPositionX)
         {
-            // Inverte a direção do movimento para esquerda
             movingRight = false;
         }
         else if (transform.position.x <= initialPositionX)
         {
-            // Inverte a direção do movimento para direita
             movingRight = true;
         }
     }
@@ -53,16 +50,20 @@ public class EnemyScript : MonoBehaviour
     {
         if (collision.CompareTag("bullet"))
         {
-            // Verifica se o inimigo ainda está vivo
+            bullets = GameObject.FindGameObjectsWithTag("bullet");
+
+            for (int i = 0; i <= bullets.Length - 1; i++) {
+                Destroy(bullets[i]);
+            }
+
+            AudioManager.Instance.PlaySFX("Impact");
+
             if (currentHealth > 0)
             {
-                // Reduz a vida do inimigo
                 currentHealth--;
 
-                // Verifica se o inimigo foi derrotado
                 if (currentHealth <= 0)
                 {
-                    // O inimigo foi derrotado, chame uma função para lidar com a morte do inimigo aqui
                     EnemyDeath();
                 }
             }
@@ -71,12 +72,10 @@ public class EnemyScript : MonoBehaviour
 
     void EnemyDeath()
     {
-        // Lógica para lidar com a morte do inimigo
-        // Por exemplo, você pode destruir o objeto do inimigo, tocar uma animação de morte, adicionar pontos ao jogador, etc.
         Destroy(gameObject);
         Cave.totalDeadEnemies = Cave.totalDeadEnemies + 1;
 
-        if (Cave.totalDeadEnemies == 1) {
+        if (Cave.totalDeadEnemies == Cave.totalEnemiesOnScene) {
             door.GetComponent<SpriteRenderer>().color = Color.green;
         }
     }

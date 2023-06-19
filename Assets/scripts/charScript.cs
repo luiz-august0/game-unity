@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharScript : MonoBehaviour
 {
+    UserData UserData;
     public GameObject fireProject;
     public Transform gun;
     private bool fire;
@@ -86,6 +88,17 @@ public class CharScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collisor) {
         if(collisor.gameObject.layer == 3) {
             isJumping = false;
+        }
+
+        if(collisor.gameObject.tag == "enemy") {
+            UserData.life--;
+            AudioManager.Instance.PlaySFX("Pain");
+
+            if (UserData.life <= 0) {
+                UserData.score = 0;
+                UserData.life = 4;
+                SceneManager.LoadScene("gameOver");
+            }
         }
     }
 
