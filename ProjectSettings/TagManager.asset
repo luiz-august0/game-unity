@@ -8,6 +8,7 @@ TagManager:
   - row
   - char
   - enemy
+  - enemy2
   layers:
   - Default
   - TransparentFX
