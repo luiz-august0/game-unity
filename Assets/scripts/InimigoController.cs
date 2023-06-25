@@ -1,47 +1,96 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InimigoController : MonoBehaviour
 {
-    public float velocidade = 2f;
-    public float amplitude = 2f;
-    private bool foiPuladoEmCima = false;
-    private float tempo = 0f;
+    Cave Cave;
+    UserData UserData;
+    public SpriteRenderer door;
+    public float moveSpeed;
+    public float moveDistance;  
+    public int maxHealth = 2;  
+    private int currentHealth; 
 
-    private void Update()
+    private float initialPositionX;   
+    private float targetPositionX;    
+
+    private bool movingRight = true; 
+    private GameObject[] bullets;
+
+    private Vector3 initialPosition;
+    private bool isDestroyed = false;
+
+    void Start()
     {
-        if (!foiPuladoEmCima)
+        initialPositionX = transform.position.x;
+        targetPositionX = initialPositionX + moveDistance;
+        currentHealth = maxHealth;
+
+        initialPosition = transform.position;
+    }
+
+    void Update()
+    {
+        if (movingRight)
         {
-            Movimentar();
+            transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
+        }
+
+        if (transform.position.x >= targetPositionX)
+        {
+            movingRight = false;
+        }
+        else if (transform.position.x <= initialPositionX)
+        {
+            movingRight = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && !isDestroyed)
+        {
+            DestroyEnemy();
         }
     }
 
-    private void Movimentar()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        tempo += Time.deltaTime;
-        float movimentoHorizontal = Mathf.Sin(tempo * velocidade) * amplitude;
-        Vector2 movimento = new Vector2(movimentoHorizontal, 0);
-        transform.Translate(movimento * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("char"))
+        if (collision.CompareTag("bullet"))
         {
-            // Verifica se o jogador está acima do inimigo
-            float alturaDoInimigo = transform.position.y + GetComponent<BoxCollider2D>().bounds.size.y / 2;
-            float alturaDoJogador = collision.transform.position.y;
-            
-            if (alturaDoJogador > alturaDoInimigo)
+            bullets = GameObject.FindGameObjectsWithTag("bullet");
+
+            for (int i = 0; i <= bullets.Length - 1; i++) {
+                Destroy(bullets[i]);
+            }
+
+            AudioManager.Instance.PlaySFX("Impact");
+
+            if (currentHealth > 0)
             {
-                foiPuladoEmCima = true;
-                DestruirInimigo();
+                currentHealth--;
+
+                if (currentHealth <= 0)
+                {
+                    DestroyEnemy();
+                }
             }
         }
     }
 
-    private void DestruirInimigo()
+    void DestroyEnemy()
     {
-        // Coloque aqui qualquer ação que deseje executar ao destruir o inimigo
-        Destroy(gameObject);
+        Cave.totalDeadEnemies = Cave.totalDeadEnemies + 1;
+        UserData.score++;
+
+        if (Cave.totalDeadEnemies == Cave.totalEnemiesOnScene) {
+            door.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+
+        isDestroyed = true;
+        gameObject.SetActive(false);
     }
 }
