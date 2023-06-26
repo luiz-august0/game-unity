@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InimigoController : MonoBehaviour
+public class Enemy2Script : MonoBehaviour
 {
     Cave Cave;
     UserData UserData;
@@ -57,27 +57,12 @@ public class InimigoController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("bullet"))
+        if (collision.gameObject.CompareTag("char") && collision.contacts[0].normal.y <= -1)
         {
-            bullets = GameObject.FindGameObjectsWithTag("bullet");
-
-            for (int i = 0; i <= bullets.Length - 1; i++) {
-                Destroy(bullets[i]);
-            }
-
             AudioManager.Instance.PlaySFX("Impact");
-
-            if (currentHealth > 0)
-            {
-                currentHealth--;
-
-                if (currentHealth <= 0)
-                {
-                    DestroyEnemy();
-                }
-            }
+            DestroyEnemy();
         }
     }
 

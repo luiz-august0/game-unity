@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameWin : MonoBehaviour
 {
     public GameObject outputScore;
+    UserData UserData;
+    Cave Cave;
 
     public void loadSceneScores() {
         SceneManager.LoadScene("menuScores");
@@ -14,6 +16,8 @@ public class GameWin : MonoBehaviour
 
     public void loadSceneCave1() {
         SceneManager.LoadScene("cave 1");
+        Cave.totalEnemiesOnScene = 3;
+        UserData.clearFields();
     }
 
     public void Awake() {
